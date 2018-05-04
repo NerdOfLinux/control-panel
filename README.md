@@ -77,10 +77,10 @@ Please do **NOT** use this yet. It won't help you with anything, and adds a huge
 * Upgrading
 
 ## The reboot command doesn't work
-The reboot command will work just fine if you edit the backend.sh file. The reason I didn't implement this yet is because I'm currently trying to see how long I can go without a reboot :).
+The reboot command will work just fine if you edit the backend.sh file. The reason I didn't implement this yet is because I'm currently trying to see how long I can go without a reboot :-) .
 
 ## How to help
-Install this on a [VPS](https://m.do.co/c/f941d4888bfb), and look for problems, and open an issue. Alternatively, you can fork this repository, update it, and then submit a pull request.
+Install this on a [VPS](https://m.do.co/c/f941d4888bfb), look for problems, and open an issue. Alternatively, you can fork this repository, update it, and then submit a pull request.
 
 ## Supported distros
 This is currently only tested on Ubuntu 16.04, but should work on other Ubuntu versions, debian, and even operating systems based off Ubuntu or Debian. If you'd like support for antoher operating system, please let me know by filing an issue.
