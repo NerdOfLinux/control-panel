@@ -27,3 +27,7 @@ if [ $1 = "reboot" ]
 then
 	echo "yes" > /tmp/panel/reboot.out
 fi
+if [ $1 = "custom" ]
+then
+	$2 > /tmp/panel/custom.out
+fi

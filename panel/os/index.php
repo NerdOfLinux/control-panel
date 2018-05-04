@@ -20,6 +20,7 @@ if($action == ""){
 
 	echo '<a href="?action=update"> Update </a>';
 	echo '<br><a href="?action=upgrade"> Upgrade </a>';
+	echo '<br><a href="?action=custom"> Run Command </a>';
 	echo '<br><a href="?action=reboot"> Reboot';
 	if(is_file("/var/run/reboot-required")){
 		echo "(updates waiting)</a>";
@@ -69,6 +70,29 @@ setTimeout(function(){
 		echo "<h2> Going down! </h2>";
 		echo "You will be redirected to the home page in 15 seconds.";
 		shell_exec("sudo $backend reboot");
+	}
+}
+else if($action == "custom"){
+?>
+<form action="" method="post">
+Command: <input type="text" name="com">
+<input type="submit" value="Run!" name="submit">
+</form>
+<?php
+	if(isset($_POST['submit'])){
+		$com=$_POST['com'];
+		pclose(popen("sudo $backend custom \"$com\"", "r"));
+		echo '
+<script>
+document.getElementById("title").innerHTML="Update";
+function refreshFrame(){
+     $("#frame").load("/panel/os/custom.php#content")
+}
+</script>
+<pre>
+<div id="frame"></div>
+</pre>
+';
 	}
 }
 ?>
