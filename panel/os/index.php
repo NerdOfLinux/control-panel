@@ -7,7 +7,7 @@ include("$webroot/assets/header.php");
 include("$webroot/assets/locked.php");
 $backend="$webroot/assets/wrapper.sh $webroot/assets/backend.sh ";
 ?>
-<center><h1>Server Management</h1></center>
+<center><h1 id="title">Server Management</h1></center>
 <hr>
 <script>
 $(function(){
@@ -32,6 +32,7 @@ else if($action == "update"){
 	pclose(popen("sudo $backend update", "r"));
 	echo '
 <script>
+document.getElementById("title").innerHTML="Update";
 function refreshFrame(){
 	$("#frame").load("/panel/os/update.php#content")
 }
@@ -43,6 +44,7 @@ else if($action == "upgrade"){
      pclose(popen("sudo $backend upgrade", "r"));
      echo '
 <script>
+document.getElementById("title").innerHTML="Upgrade";
 function refreshFrame(){
      $("#frame").load("/panel/os/upgrade.php#content")
 }
@@ -51,8 +53,22 @@ function refreshFrame(){
 ';
 }
 else if($action == "reboot"){
-	echo "Refresh the page in a minute.";
-	echo "<br><h2> Going down! </h2>";
-	shell_exec("sudo $backend reboot");
+?>
+<form method="post" action="">
+<input type="submit" value="Reboot Now" name="submit">
+</form>
+<?php
+if(isset($_POST['submit'])){
+		echo '
+<script>
+setTimeout(function(){
+	window.location.href = "/panel";
+}, 15000);
+</script>
+';
+		echo "<h2> Going down! </h2>";
+		echo "You will be redirected to the home page in 15 seconds.";
+		shell_exec("sudo $backend reboot");
+	}
 }
 ?>
