@@ -17,7 +17,6 @@ include("assets/header.php");
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
     You can also find the full copy of the license at https://goo.gl/ksUg99
 */
-session_start();
 if($_SESSION["login"]==1){
 	echo "Already signed in.";
 	exit();

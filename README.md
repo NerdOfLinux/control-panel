@@ -57,13 +57,14 @@ sudo visudo
 and at the bottom add:
 
 ```visudo
-www-data ALL=(ALL:ALL) NOPASSWD:/var/www/control-panel/assets/backend.sh
+www-data ALL=(ALL:ALL) NOPASSWD:/var/www/control-panel/assets/wrapper.sh
 ```
 
 then exit and save. Be sure the script is executable with:
 
 ```shell
 sudo chmod +x /var/www/control-panel/assets/backend.sh
+sudo chmod +x /var/www/control-panel/assets/wrapper.sh
 ```
 
 # Notes

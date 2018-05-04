@@ -1,8 +1,8 @@
 <?php
-session_start();
 $title="Admin Panel";
-include("../assets/header.php");
-include("../assets/locked.php");
+$webroot=$_SERVER['DOCUMENT_ROOT'];
+include("$webroot/assets/header.php");
+include("$webroot/assets/locked.php");
 ?>
 <center> <h1> <?php echo gethostname();?> </h1> </center>
 <hr>
