@@ -23,3 +23,7 @@ then
           apt-get upgrade > /tmp/panel/upgrade.out
      fi
 fi
+if [ $1 = "reboot" ]
+then
+	echo "yes" > /tmp/panel/reboot.out
+fi

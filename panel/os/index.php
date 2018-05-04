@@ -19,6 +19,13 @@ $action=$_GET['action'];
 if($action == ""){
 
 	echo '<a href="?action=update"> Update </a>';
+	echo '<br><a href="?action=upgrade"> Upgrade </a>';
+	echo '<br><a href="?action=reboot"> Reboot';
+	if(is_file("/var/run/reboot-required")){
+		echo "(updates waiting)</a>";
+	}else{
+		echo "</a>";
+	}
 
 }
 else if($action == "update"){
@@ -42,5 +49,10 @@ function refreshFrame(){
 </script>
 <div id="frame"></div>
 ';
+}
+else if($action == "reboot"){
+	echo "Refresh the page in a minute.";
+	echo "<br><h2> Going down! </h2>";
+	shell_exec("sudo $backend reboot");
 }
 ?>
