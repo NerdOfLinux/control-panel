@@ -46,6 +46,7 @@ if($_POST['username'] != $data["username"]){
 if(password_verify($_POST['password'], $data["password"])){
 	echo "Success!";
 	$_SESSION["login"]=1;
+	header("Location: /panel");
 }else{
 	echo "Username or password is incorrect.";
 	exit();
