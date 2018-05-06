@@ -16,6 +16,7 @@ setInterval(refreshFrame, 1000);
 </script>
 <?php
 $action=$_GET['action'];
+//If there is no action set, provide a list of actions
 if($action == ""){
 
 	echo '<a class="button" href="?action=update"> <img class="img-button" src="/assets/images/update.png"> <br>Update </a>';
@@ -29,6 +30,7 @@ if($action == ""){
 	}
 
 }
+//If the action is set to update
 else if($action == "update"){
 	pclose(popen("sudo $backend update", "r"));
 	echo '
@@ -41,6 +43,7 @@ function refreshFrame(){
 <div id="frame"></div>
 ';
 }
+//If the action is set to upgrade
 else if($action == "upgrade"){
      pclose(popen("sudo $backend upgrade", "r"));
      echo '
@@ -53,6 +56,7 @@ function refreshFrame(){
 <div id="frame"></div>
 ';
 }
+//If the action is set to reboot
 else if($action == "reboot"){
 ?>
 <form method="post" action="">
@@ -72,6 +76,7 @@ setTimeout(function(){
 		shell_exec("sudo $backend reboot");
 	}
 }
+//If the action is set to custom
 else if($action == "custom"){
 ?>
 <form action="" method="post">
