@@ -85,3 +85,5 @@ Install this on a [VPS](https://m.do.co/c/f941d4888bfb), look for problems, and 
 ## Supported distros
 This is currently only tested on Ubuntu 16.04, but should work on other Ubuntu versions, debian, and even operating systems based off Ubuntu or Debian. If you'd like support for antoher operating system, please let me know by filing an issue.
 
+## Images
+All images,unless otherwise stated, are **NOT** made by me.

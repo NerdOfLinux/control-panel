@@ -18,10 +18,10 @@ setInterval(refreshFrame, 1000);
 $action=$_GET['action'];
 if($action == ""){
 
-	echo '<a href="?action=update"> Update </a>';
-	echo '<br><a href="?action=upgrade"> Upgrade </a>';
-	echo '<br><a href="?action=custom"> Run Command </a>';
-	echo '<br><a href="?action=reboot"> Reboot';
+	echo '<a class="button" href="?action=update"> <img class="img-button" src="/assets/images/update.png"> <br>Update </a>';
+	echo '<a class="button" href="?action=upgrade"> <img class="img-button" src="/assets/images/upgrade.png"><br>Upgrade </a>';
+	echo '<a class="button" href="?action=custom"> <img class="img-button" src="/assets/images/bash.png"><br> Run Command </a>';
+	echo '<a class="button" href="?action=reboot"> <img class="img-button" src="/assets/images/reboot.png"><br>Reboot';
 	if(is_file("/var/run/reboot-required")){
 		echo "(updates waiting)</a>";
 	}else{
