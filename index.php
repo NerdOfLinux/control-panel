@@ -28,7 +28,7 @@ UserName: <input type="text" required name="username">
 Password: <input type="password" required name="password">
 <input type="submit" name="submit" value="Sign In">
 </pre>
-</from>
+</form>
 <?php
 if(!isset($_POST['submit'])){
 	exit();

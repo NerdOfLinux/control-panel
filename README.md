@@ -45,7 +45,9 @@ server {
 ```
 
 ## Run the installer
-After the above steps, simply go to panel.example.com/install.php, and enter an email, username, and password. There is **no** email verification(you're the only person who's going to be using it), so be sure the email is correct. After the installtion is complete, there will be a file called `.ht.users.json` which contains your login info, which will lock the installer. You can now go to panel.example.com/panel/index.php. Be sure to put `index.php` at the end, otherwise you'll get a 403 error(this is for security reasons).
+After the above steps, simply go to panel.example.com/install.php, and enter a username and password. After the installtion is complete, there will be a file called .ht.users.json which contains your login info, which will lock the installer. You can now go to panel.example.com/panel/index.php and log in.
+
+
 
 ## visudo time!
 With a `sudo` user, run

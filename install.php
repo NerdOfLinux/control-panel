@@ -8,20 +8,24 @@ if(file_exists(".ht.users.json")){
 ?>
 <form action="" method="post">
 <pre>
-Email:    <input type="email" required name="email">
 UserName: <input type="text" required name="username">
 Password: <input type="password" required name="password">
+Verify:   <input type="password" required name="verify">
 <input type="submit" name="submit" value="Set Up">
 </pre>
-</from>
+</form>
 <?php
 //Only run once submit button is pressed
 if(!isset($_POST['submit'])){
 	exit();
 }
+//Verify passwords
+if($_POST['password']!==$_POST['verify']){
+	echo "Passwords don't match!";
+	exit();
+}
 //Create an array
 $data=[];
-$data["email"] = $_POST['email'];
 $data["username"] = $_POST['username'];
 $data["password"] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $json = json_encode($data);
