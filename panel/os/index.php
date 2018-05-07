@@ -59,6 +59,9 @@ function refreshFrame(){
 //If the action is set to reboot
 else if($action == "reboot"){
 ?>
+<script>
+document.getElementById("title").innerHTML="Reboot";
+</script>
 <form method="post" action="">
 <input type="submit" value="Reboot Now" name="submit">
 </form>
@@ -79,6 +82,9 @@ setTimeout(function(){
 //If the action is set to custom
 else if($action == "custom"){
 ?>
+<script>
+document.getElementById("title").innerHTML="Custom";
+</script>
 <form action="" method="post">
 Command: <input type="text" name="com">
 <input type="submit" value="Run!" name="submit">
