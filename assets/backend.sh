@@ -31,6 +31,6 @@ if [ $1 = "custom" ]
 then
 	kill $(cat /tmp/panel/custom.pid)
 	echo "" > /tmp/panel/custom.out
-	$2 > /tmp/panel/custom.out &
+	$2 > /tmp/panel/custom.out 2>&1 &
 	echo "$!" > /tmp/panel/custom.pid
 fi

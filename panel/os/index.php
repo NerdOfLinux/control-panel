@@ -86,8 +86,8 @@ else if($action == "custom"){
 document.getElementById("title").innerHTML="Custom";
 </script>
 <form action="" method="post">
-Command: <input type="text" name="com">
-<input type="submit" value="Run!" name="submit">
+Command: <input id="comInput" type="text" name="com" autocomplete="off">
+<input id="comButton" type="submit" name="submit" value="Run!">
 </form>
 <?php
 	if(isset($_POST['submit'])){

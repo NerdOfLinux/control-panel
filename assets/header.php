@@ -13,7 +13,11 @@ echo "<title>$title</title>";
 <link rel="stylesheet" href="/assets/style.css">
 -->
 <style>
-<?php include("style.css") ?>
+<?php
+//Condense all CSS
+$contents=file_get_contents("$webroot/assets/style.css");
+echo preg_replace("*\s*", "", $contents);
+?>
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 

@@ -1,5 +1,6 @@
 <?php
 $title="Login";
+$webroot=$_SERVER['DOCUMENT_ROOT'];
 include("assets/header.php");
 /*
     Control Panel- A simple control panel to install WordPress and manage a VPS
@@ -24,9 +25,9 @@ if($_SESSION["login"]==1){
 ?>
 <form action="" method="post">
 <pre>
-UserName: <input type="text" required name="username">
-Password: <input type="password" required name="password">
-<input type="submit" name="submit" value="Sign In">
+UserName: <input class="fancyInput" type="text" required name="username">
+Password: <input class="fancyInput" type="password" required name="password">
+<input class="fancyButton" type="submit" name="submit" value="Sign In">
 </pre>
 </form>
 <?php
