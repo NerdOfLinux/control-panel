@@ -7,7 +7,7 @@ include("$webroot/assets/header.php");
 include("$webroot/assets/locked.php");
 $backend="$webroot/assets/wrapper.sh $webroot/assets/backend.sh ";
 ?>
-<center><h1 id="title">Server Management</h1></center>
+<h1 class="center" id="title">Server Management</h1>
 <hr>
 <script>
 $(function(){
@@ -63,7 +63,7 @@ else if($action == "reboot"){
 document.getElementById("title").innerHTML="Reboot";
 </script>
 <form method="post" action="">
-<input type="submit" value="Reboot Now" name="submit">
+<input id="rebootButton" type="submit" value="Reboot Now" name="submit">
 </form>
 <?php
 if(isset($_POST['submit'])){

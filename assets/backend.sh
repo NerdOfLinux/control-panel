@@ -34,3 +34,7 @@ then
 	$2 > /tmp/panel/custom.out 2>&1 &
 	echo "$!" > /tmp/panel/custom.pid
 fi
+if [ $1 = "write" ]
+then
+	cp "$2" "$3" 2>&1
+fi

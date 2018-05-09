@@ -1,0 +1,87 @@
+.output{
+     border-style: none;
+}
+a{
+     color: blue;
+}
+.button{
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+	margin: 5px;
+	display: inline-block;
+	background-color: whitesmoke;
+	color: blue;
+	text-decoration: none;
+	text-align: center;
+	height: 10%;
+}
+.button:hover{
+	border-style: inset;
+	border-width: 2px;
+}
+.img-button{
+	height: 90px;
+	width: 130px;
+	object-fit: contain;
+}
+.fancyButton{
+	width: 200px;
+	height: 25px;
+	padding: 3px;
+	margin: 5px;
+	background-color: lightsteelblue;
+	border-radius: 5px;
+}
+.fancyButton:hover{
+	border-style: inset;
+}
+.fancyButton:focus{
+	background-color: lightgray;
+}
+.fancyInput{
+	height: 25px;	
+	padding: 3px;
+	margin: 3px;
+	border-radius: 3px;
+}
+#comInput{
+     height: 20px;  
+     padding: 3px;
+     margin: 3px;
+     border-radius: 5px;
+	border-width: 1px;
+	border-color: black;
+}
+#comButton{
+     width: 50px;
+     height: 25px;
+     padding: 3px;
+     margin: 5px;
+     background-color: lightsteelblue;
+     border-radius: 5px;
+}
+#comButton:hover{
+	border-style: inset;
+}
+#comButton:focus{
+	background-color: lightgray;	
+}
+#rebootButton{
+     width: 150px;
+     height: 50px;
+     padding: 3px;
+     margin: 5px;
+     background-color: lightsteelblue;
+     border-radius: 5px;
+	font-size: 20px;
+}
+#rebootButton:hover{
+     border-style: inset;
+}
+#rebootButton:focus{
+	background-color: lightgray;
+}
+.center{
+	text-align: center;
+}

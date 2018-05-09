@@ -10,6 +10,7 @@ include("$webroot/assets/locked.php");
 <ul>
 <li> <a href="installers/index.php"> Installers </a> </li>
 <li> <a href="os/index.php"> Server Management </a> </li>
+<li> <a href="nginx/index.php"> NGINX </a> </li>
 <li> <a href="?action=logout"> Logout </a> </li>
 </ul>
 <?php
