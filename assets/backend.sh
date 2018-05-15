@@ -20,7 +20,7 @@ if [ $1 = "upgrade" ]
 then
      if ! ps -aux | grep "apt-get upgrade" | grep -v "grep" >/dev/null
      then
-          apt-get upgrade > /tmp/panel/upgrade.out
+          apt-get -y upgrade > /tmp/panel/upgrade.out
      fi
 fi
 if [ $1 = "reboot" ]

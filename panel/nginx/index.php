@@ -14,7 +14,7 @@ $action=$_GET['action'];
 //If there is no action set, provide a list of actions
 if($action == ""){
 ?>
-<a class="button" href="?action=edit"> <br> Edit Configs </a>
+<a class="button" href="?action=edit"><img class="img-button" src="/assets/images/edit.png"> <br> Edit Configs </a>
 <?php
 }
 if($action == "edit"){
