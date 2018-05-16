@@ -5,13 +5,17 @@ if [ ! -d /tmp/panel ]
 then
 	mkdir /tmp/panel
 fi
+if [ ! -d /tmp/panel/install ]
+then
+	mkdir /tmp/panel/install
+fi
 
 if [ $1 = "update" ]
 then
 	if ! ps -aux | grep "apt-get update" | grep -v "grep" >/dev/null
 	then
 		apt-get update > /tmp/panel/update.out
-		echo " Available updates: " >> /tmp/panel/update.out
+		echo "<h3> Available updates: </h3>" >> /tmp/panel/update.out 2>&1
 		apt list --upgradeable >> /tmp/panel/update.out
 	fi
 fi
@@ -20,7 +24,7 @@ if [ $1 = "upgrade" ]
 then
      if ! ps -aux | grep "apt-get upgrade" | grep -v "grep" >/dev/null
      then
-          apt-get -y upgrade > /tmp/panel/upgrade.out
+          apt-get -y upgrade > /tmp/panel/upgrade.out 2>&1
      fi
 fi
 if [ $1 = "reboot" ]
@@ -37,4 +41,8 @@ fi
 if [ $1 = "write" ]
 then
 	cp "$2" "$3" 2>&1
+fi
+if [ $1 = "install" ]
+then
+	bash $env/installers/$2.sh ${@:3} >/tmp/panel/install/$2.out 2>&1
 fi

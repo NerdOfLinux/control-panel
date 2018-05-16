@@ -14,6 +14,9 @@ echo "<title>$title</title>";
 -->
 <style>
 <?php
+//Disallow caching
+header("Cache-Control: max-age=0");
+header("Pragma: no-cache");
 //Condense all CSS
 $contents=file_get_contents("$webroot/assets/style.css");
 echo preg_replace("*\s*", "", $contents);

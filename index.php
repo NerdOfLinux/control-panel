@@ -20,6 +20,7 @@ include("assets/header.php");
 */
 if($_SESSION["login"]==1){
 	echo "Already signed in.";
+	header("Location: /panel");
 	exit();
 }
 ?>
