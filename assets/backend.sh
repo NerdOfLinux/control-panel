@@ -46,3 +46,14 @@ if [ $1 = "install" ]
 then
 	bash $env/installers/$2.sh ${@:3} >/tmp/panel/install/$2.out 2>&1
 fi
+if [ $1 = "restartnginx" ]
+then
+	if nginx -t > /tmp/panel/restartnginx.out 2>&1
+	then
+		echo "Restarting NGINX..." >> /tmp/panel/restartnginx.out
+		if service nginx restart >> /tmp/panel/restartnginx.out 2>&1
+		then
+			echo "NGINX Restarted" >> /tmp/panel/restartnginx.out
+		fi
+	fi
+fi
