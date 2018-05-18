@@ -5,6 +5,11 @@ echo "Installing the latest version of WordPress to $domain"
 echo "Please DO NOT leave this page or refresh untill the install is complete!"
 echo "If the install fails, run the following command in the custom command section: "
 echo "rm -rf $dir"
+if [ -d "$dir" ]
+then
+	echo "$dir already exists, please delete it to continue."
+	exit
+fi
 mkdir $dir
 echo "Installing required PHP packages:"
 apt-get -y install php-mysql php-curl php-imagick php-gd php-mbstring php-mcrypt php-pspell php-zip
@@ -130,6 +135,8 @@ location ~ ^/\.user\.ini {
 EOF
 echo "Enabling config..."
 ln -s /etc/nginx/sites-available/wp-$domain.conf /etc/nginx/sites-enabled/
+echo "Setting permissions, please be patient..."
+chown -R www-data:www-data $dir
 echo "Restarting NGINX..."
 if nginx -t
 then

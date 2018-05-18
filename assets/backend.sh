@@ -12,7 +12,7 @@ fi
 
 if [ $1 = "update" ]
 then
-	if ! ps -aux | grep "apt-get update" | grep -v "grep" >/dev/null
+	if ! lsof | grep /tmp/panel/update.out > /dev/null
 	then
 		apt-get update > /tmp/panel/update.out
 		echo "<h3> Available updates: </h3>" >> /tmp/panel/update.out 2>&1
@@ -22,7 +22,7 @@ fi
 
 if [ $1 = "upgrade" ]
 then
-     if ! ps -aux | grep "apt-get upgrade" | grep -v "grep" >/dev/null
+	if ! lsof | grep /tmp/panel/upgrade.out > /dev/null
      then
           apt-get -y upgrade > /tmp/panel/upgrade.out 2>&1
      fi
@@ -55,5 +55,17 @@ then
 		then
 			echo "NGINX Restarted" >> /tmp/panel/restartnginx.out
 		fi
+	fi
+fi
+if [ $1 = "nginx" ]
+then
+	echo "$@" > /tmp/test.out
+	if [ $2 = "activate" ]
+	then
+		ln -s $3 /etc/nginx/sites-enabled/
+	elif [ $2 = "deactivate" ]
+	then
+		echo "deleting $3" >> /tmp/test.out
+		rm $3 >/tmp/test.out 2>&1
 	fi
 fi

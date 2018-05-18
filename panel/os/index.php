@@ -37,7 +37,7 @@ else if($action == "update"){
 <script>
 document.getElementById("title").innerHTML="Update";
 function refreshFrame(){
-	$("#frame").load("/panel/os/actions.php?type=update#content")
+	$("#frame").load("/assets/readfile.php?type=update#content")
 }
 </script>
 <div id="frame"></div>
@@ -50,7 +50,7 @@ else if($action == "upgrade"){
 <script>
 document.getElementById("title").innerHTML="Upgrade";
 function refreshFrame(){
-     $("#frame").load("/panel/os/actions.php?type=upgrade#content")
+     $("#frame").load("/assets/readfile.php?type=upgrade#content")
 }
 </script>
 <div id="frame"></div>
@@ -97,7 +97,7 @@ Command: <input id="comInput" type="text" name="com" autocomplete="off">
 <script>
 document.getElementById("title").innerHTML="Update";
 function refreshFrame(){
-     $("#frame").load("/panel/os/actions.php?type=custom#content")
+     $("#frame").load("/assets/readfile.php?type=custom#content")
 }
 </script>
 <pre>

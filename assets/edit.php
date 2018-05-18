@@ -10,9 +10,6 @@ if(!isset($backend)){
 <textarea rows="25" cols="100"  name="text"> <?php echo file_get_contents($file); ?> </textarea>
 <input type="submit" name="submit" value="Update">
 </form>
-<script>
-document.getElementById('title').innerHTML="NGINX Editor";
-</script>
 <?php
 if(!isset($_POST['submit'])){
 	exit();
