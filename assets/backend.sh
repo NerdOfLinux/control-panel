@@ -40,6 +40,11 @@ then
 fi
 if [ $1 = "write" ]
 then
+	if [ ! -f "$3" ]
+	then
+		touch "$3"
+		chmod 604 "$3"
+	fi
 	cp "$2" "$3" 2>&1
 fi
 if [ $1 = "install" ]

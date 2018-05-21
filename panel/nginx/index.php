@@ -20,7 +20,9 @@ $action=$_GET['action'];
 if($action == ""){
 ?>
 <a class="button" href="?action=editconfig"><img class="img-button" src="/assets/images/edit.png"> <br> Edit Configs </a>
+<a class="button" href="?action=createconfig"><img class="img-button" src="/assets/images/create.png"><br> Create Config </a>
 <a class="button" href="?action=editsnippets"><img class="img-button" src="/assets/images/edit2.png"><br>Edit Snippets</br></a>
+<a class="button" href="?action=createsnippet"><img class="img-button" src="/assets/images/create2.png"><br>Create Snippets</a>
 <a class="button" href="?action=manage"><img class="img-button" src="/assets/images/activate.png"><br>Manage Sites</a>
 <a class="button" href="?action=restart"><img class="img-button" src="/assets/images/restart.png"><br>Restart NGINX</a>
 <?php
@@ -112,7 +114,50 @@ document.getElementById("title").innerHTML="Snippet Editor";
           }
      }
      echo "</ul>";
+}else if($action == "createconfig"){
+?>
+<script>
+document.getElementById("title").innerHTML="Create NGINX Config File";
+</script>
+<form action="" method="get" id="hideOnClick">
+<input style="display:none" name="action" value="createconfig">
+Filename: <input type="text" name="file">
+<input type="submit" value="Create">
+</form>
+<?php
+	if(isset($_GET['file'])){
+?>
+<script>
+document.getElementById("hideOnClick").style.display="none";
+</script>
+<?php
+		$file=$_GET['file'];
+		$file="/etc/nginx/sites-available/$file";
+		include("$webroot/assets/edit.php");
+	}
+}else if($action == "createsnippet"){
+?>
+<script>
+document.getElementById("title").innerHTML="Create NGINX Snippet";
+</script>
+<form action="" method="get" id="hideOnClick">
+<input style="display:none" name="action" value="createsnippet">
+Filename: <input type="text" name="file">
+<input type="submit" value="Create">
+</form>
+<?php
+     if(isset($_GET['file'])){
+?>
+<script>
+document.getElementById("hideOnClick").style.display="none";
+</script>
+<?php
+          $file=$_GET['file'];
+          $file="/etc/nginx/snippets/$file";
+          include("$webroot/assets/edit.php");
+     }
 }
+
 ?>
 <pre>
 <div id="frame"></div>
