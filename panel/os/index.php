@@ -1,5 +1,6 @@
 <?php
 session_start();
+//Set vars
 $safe=true;
 $webroot=$_SERVER['DOCUMENT_ROOT'];
 $title="VPS Management";
@@ -32,6 +33,8 @@ if($action == ""){
 }
 //If the action is set to update
 else if($action == "update"){
+	//Does not use exec so page loads nearly instantly without waiting
+	//This runs it without making PHP wait for a response
 	pclose(popen("sudo $backend update", "r"));
 	echo '
 <script>

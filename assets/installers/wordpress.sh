@@ -1,29 +1,35 @@
 #!/bin/bash
+#Set the variable domain equal to the first argument recieved
 domain="$1"
 dir="/var/www/wp-$domain"
 echo "Installing the latest version of WordPress to $domain"
 echo "Please DO NOT leave this page or refresh untill the install is complete!"
 echo "If the install fails, run the following command in the custom command section: "
 echo "rm -rf $dir"
+#If the directory already exists, assume the install has already run
 if [ -d "$dir" ]
 then
 	echo "$dir already exists, please delete it to continue."
 	exit
 fi
 mkdir $dir
+# Install dependencies
 echo "Installing required PHP packages:"
 apt-get -y install php-mysql php-curl php-imagick php-gd php-mbstring php-mcrypt php-pspell php-zip
 echo "Moving to /tmp..."
 cd /tmp
 mkdir wp-tmp
 cd wp-tmp
+# Download + extract WordPress
 echo "Getting latest WordPress version..."
 curl https://wordpress.org/latest.zip -o wordpress.zip
 echo "Extracting into $dir..."
 unzip wordpress.zip >/dev/null 2>&1
 cp -R wordpress/* $dir
 cd $dir
+#DB magic
 echo "Generating DB..."
+#Generate secure password
 password=$(openssl rand -base64 32)
 safedomain=$(echo $domain | sed "s/\./_/g")
 mysql --execute "CREATE DATABASE wp_$safedomain"
@@ -31,6 +37,7 @@ mysqlexec="GRANT ALL PRIVILEGES ON wp_$safedomain.* TO wp_user_$safedomain IDENT
 mysql --execute "$mysqlexec"
 mysql --execute "FLUSH PRIVILEGES;"
 echo "Generating wp-config.php..."
+#Set up the wp-config.php file with DB settings
 cat > wp-config.php <<EOF
 <?php
 /**
@@ -102,6 +109,7 @@ if ( !defined('ABSPATH') )
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH . 'wp-settings.php');
 EOF
+#Create the NGINX config file
 echo "Generating NGINX config..."
 cat > /etc/nginx/sites-available/wp-$domain.conf <<EOF
 server{

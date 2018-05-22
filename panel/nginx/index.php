@@ -1,5 +1,6 @@
 <?php
 session_start();
+//Set a bunch of vars
 $safe=true;
 $webroot=$_SERVER['DOCUMENT_ROOT'];
 $title="VPS Management";
@@ -27,12 +28,14 @@ if($action == ""){
 <a class="button" href="?action=restart"><img class="img-button" src="/assets/images/restart.png"><br>Restart NGINX</a>
 <?php
 }
+//If the action equals something, then do stuff
 if($action == "editconfig"){
 ?>
 <script>
 document.getElementById("title").innerHTML="Config Editor";
 </script>
 <?php
+	//If the GET variables 'file' is set, assume the form has been filled out, and provide an editor
 	if(isset($_GET['file'])){
 		$file=$_GET['file'];
 		include("$webroot/assets/edit.php");
@@ -40,10 +43,15 @@ document.getElementById("title").innerHTML="Config Editor";
 	}
 	echo "<h3> Enabled Configs: </h3>";
 	echo "<ul>";
-	foreach(scandir("/etc/nginx/sites-enabled/") as $file){
-		if($file[0] != "." && is_file("/etc/nginx/sites-enabled/$file")){
-			$path=urlencode("/etc/nginx/sites-enabled/$file");
-			echo "<li> <a href='?action=editconfig&file=$path'> $file </a></li>";
+	//For each file in the folder sites-enabled, create an unordered list
+	foreach(scandir("/etc/nginx/sites-available/") as $file){
+		if($file[0] != "." && is_file("/etc/nginx/sites-available/$file")){
+			$path=urlencode("/etc/nginx/sites-available/$file");
+			if(is_file("/etc/nginx/sites-enabled/$file")){
+				echo "<li> <a href='?action=editconfig&file=$path' style='color:darkgreen'> $file(active) </a></li>";
+			}else{
+				echo "<li> <a href='?action=editconfig&file=$path' style='color:darkred'> $file(<span style='font-weight: bold'>NOT</span> active) </a></li>";
+			}
 		}
 	}
 	echo "</ul>";
@@ -121,8 +129,8 @@ document.getElementById("title").innerHTML="Create NGINX Config File";
 </script>
 <form action="" method="get" id="hideOnClick">
 <input style="display:none" name="action" value="createconfig">
-Filename: <input type="text" name="file">
-<input type="submit" value="Create">
+Filename: <input type="text" name="file" class="fancyInput">
+<input type="submit" value="Create" class="fancyButton" style='width: 50px;'>
 </form>
 <?php
 	if(isset($_GET['file'])){
@@ -142,8 +150,8 @@ document.getElementById("title").innerHTML="Create NGINX Snippet";
 </script>
 <form action="" method="get" id="hideOnClick">
 <input style="display:none" name="action" value="createsnippet">
-Filename: <input type="text" name="file">
-<input type="submit" value="Create">
+Filename: <input type="text" name="file" class="fancyInput">
+<input type="submit" value="Create" class="fancyButton" style="width: 50px">
 </form>
 <?php
      if(isset($_GET['file'])){
