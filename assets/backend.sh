@@ -74,3 +74,38 @@ then
 		rm $3 >/tmp/test.out 2>&1
 	fi
 fi
+if [ $1 = "panelupdate" ]
+then
+	if ! lsof | grep /tmp/panel/panelupdate.out > /dev/null
+	then
+		su - www-data -c "cd $2;git pull origin master" >/tmp/panel/panelupdate.out 2>&1
+	fi
+fi
+if [ $1 = "letsencrypt" ]
+then
+	if ! lsof | grep /tmp/panel/letsencrypt.out > /dev/null
+	then
+		>/tmp/panel/letsencrypt.out
+		domains=$(echo "-d $2" | sed "s/,/ -d /g")
+		dns=$3
+		email=$4
+		key=$5
+		if [ ! -d /var/www/.acme.sh ]
+		then
+			echo "Getting acme.sh" >/tmp/panel/letsencrypt.out
+			su - www-data -c "wget -O -  https://get.acme.sh | sh" >>/tmp/panel/letsencrypt.out
+		fi
+		upper=$(echo $dns | awk '{print toupper($0)}')
+		apt-get -y install python python-pip >> /tmp/panel/letsencrypt.out 2>&1
+ 		pip install dns-lexicon >> /tmp/panel/letsencrypt.out 2>&1
+		su - www-data -c "PATH=$PATH:/var/www/.acme.sh;acme.sh --upgrade;export PROVIDER=$dns;export LEXICON_${upper}_USERNAME=\"$email\";export LEXICON_${upper}_TOKEN=\"$key\";acme.sh --issue $domains --dns dns_lexicon" >>/tmp/panel/letsencrypt.out 2>&1
+		certname=$(echo $2 | cut -d "," -f 1)
+		cat <<EOF >/etc/nginx/snippets/ssl
+listen [::]:443 ssl;
+listen *:443 ssl;
+ssl_certificate /var/www/.acme.sh/${certname}/${certname}.cer;
+ssl_certificate_key /var/www/.acme.sh/${certname}/${certname}.key;
+EOF
+		echo "Please restart NGINX" >> /tmp/panel/letsencrypt.out
+	fi
+fi

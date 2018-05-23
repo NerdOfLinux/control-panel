@@ -3,7 +3,7 @@ session_start();
 //Set a bunch of vars
 $safe=true;
 $webroot=$_SERVER['DOCUMENT_ROOT'];
-$title="VPS Management";
+$title="NGINX Management";
 include("$webroot/assets/header.php");
 include("$webroot/assets/locked.php");
 $backend="$webroot/assets/wrapper.sh $webroot/assets/backend.sh ";
@@ -25,7 +25,9 @@ if($action == ""){
 <a class="button" href="?action=editsnippets"><img class="img-button" src="/assets/images/edit2.png"><br>Edit Snippets</br></a>
 <a class="button" href="?action=createsnippet"><img class="img-button" src="/assets/images/create2.png"><br>Create Snippets</a>
 <a class="button" href="?action=manage"><img class="img-button" src="/assets/images/activate.png"><br>Manage Sites</a>
-<a class="button" href="?action=restart"><img class="img-button" src="/assets/images/restart.png"><br>Restart NGINX</a>
+<a class="button" href="?action=ssl" style="border-color: blue"><img class="img-button" src="/assets/images/encryption.png"><br>Let's Encrypt</br></a>
+<a class="button" href="?action=restart" style="border-color: blue"><img class="img-button" src="/assets/images/restart.png"><br>Restart NGINX</a>
+
 <?php
 }
 //If the action equals something, then do stuff
@@ -164,9 +166,59 @@ document.getElementById("hideOnClick").style.display="none";
           $file="/etc/nginx/snippets/$file";
           include("$webroot/assets/edit.php");
      }
+}else if($action=="ssl"){
+?>
+<script>
+document.getElementById("title").innerHTML="Let's Encrypt";
+</script>
+<pre>
+<form action="" method="post" id="hideOnClick">
+<span style="font-weight: bold">Note: </span>Separate domains with commas, and for wildcard certs, use: "example.com, *.example.com"
+Domain Name:    <input type="text" class="fancyInput" name="domain" required>
+DNS Provider:   <select name="dns">
+<option value="cloudflare">Cloudflare</option>
+<option value="digitalocean">DigitalOcean</option>
+<option value="dnsimple">DNSimple</option>
+<option value="dnsmadeeasy">DNSMadeEasy</option>
+<option value="dnspark">DNSPark</option>
+<option value="easydns">EasyDNS</option>
+<option value="namesilo">Namesilo</option>
+<option value="ns1">NS1</option>
+<option value="pointHQ">PointHQ</option>
+<option value="rage4">Rage4</option>
+<option value="vultr">Vultr</options>
+</select>
+<?php
+if(is_dir("/var/www/.acme.sh")){
+?>
+<input type="checkbox" required> I understand this may overwrite any existing certs.
+<?php
+}
+?>
+Email/Username: <input type="text" class="fancyInput" name="email" required>
+API Key:        <input type="password" class="fancyInput" name="key" required>
+<input type="submit" class="fancyButton" value="Create SSL Cert" name="submit">
+</form>
+</pre>
+<br>
+<?php
+	if(isset($_POST['submit'])){
+		$domain=$_POST['domain'];
+		$email=$_POST['email'];
+		$key=$_POST['key'];
+		$dns=$_POST['dns'];
+	echo "Setting up Let's Encrypt wildcard for $domain on $dns DNS";
+	pclose(popen("sudo $backend letsencrypt $domain $dns $email $key", "r"));
+?>
+<script>
+document.getElementById("hideOnClick").style.display="none";
+function refreshFrame(){
+     $("#frame").load("/assets/readfile.php?type=letsencrypt#content")
+}
+</script>
+<?php
+	}
 }
 
 ?>
-<pre>
 <div id="frame"></div>
-</pre>
