@@ -25,8 +25,8 @@ if($action == ""){
 <a class="button" href="?action=editsnippets"><img class="img-button" src="/assets/images/edit2.png"><br>Edit Snippets</br></a>
 <a class="button" href="?action=createsnippet"><img class="img-button" src="/assets/images/create2.png"><br>Create Snippets</a>
 <a class="button" href="?action=manage"><img class="img-button" src="/assets/images/activate.png"><br>Manage Sites</a>
-<a class="button" href="?action=ssl" style="border-color: blue"><img class="img-button" src="/assets/images/encryption.png"><br>Let's Encrypt</br></a>
-<a class="button" href="?action=restart" style="border-color: blue"><img class="img-button" src="/assets/images/restart.png"><br>Restart NGINX</a>
+<a class="button" href="?action=ssl"><img class="img-button" src="/assets/images/encryption.png"><br>Let's Encrypt</br></a>
+<a class="button" href="?action=restart"><img class="img-button" src="/assets/images/restart.png"><br>Restart NGINX</a>
 
 <?php
 }
