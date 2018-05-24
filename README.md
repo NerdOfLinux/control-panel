@@ -7,86 +7,11 @@ This control panel is **NOT** meant to replace all other control panels, but is 
 I could not find a control panel that had both installers *and* a way to see if a VPS requires updates, or a restart to install those updates. 
 
 # Installation
-This is still a work in progress and currently does nothing, but, if you want to give some feedback, here's how to install it:
-
-## Install required thingies:
-```shell
-sudo apt install git nginx mariadb-client-10.0 mariadb-server-10.0 php7.0-fpm php-json
-```
-
-## Clone the repo
-```shell
-cd /var/www/
-git clone https://github.com/NerdOfLinux/control-panel.git
-```
-
-## Configure NGINX
-This currently only supports the NGINX web server. Here's a sample config:
-
-```nginx
-server {
-        listen *:80;
-
-        index index.php;
-        root /var/www/control-panel;
-        server_name panel.example.com;
-        include /var/www/control-panel/nginx.conf;
-        location /{
-                try_files $uri $uri/ index.php;
-        }
-
-	   include snippets/php;
-         location ~ /\.ht {
-                deny all;
-        }
-       include snippets/ssl;
-}
-```
-
-### Keep the includes
-It's written with `include snippets/php` and `include snippets/ssl` on purpose, the installers rely on that. 
-Put the following in `/etc/nginx/snippets/php`:
-```nginx
-location ~ \.php$ {
-        fastcgi_index index.php;
-        try_files $uri =404;
-        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-        include /etc/nginx/fastcgi.conf;
-}
-```
-and just create(i.e. `touch` command) `/etc/nginx/snippets/ssl`. Or, put your SSL config there.
-
-## Run the installer
-After the above steps, simply go to panel.example.com/install.php, and enter a username and password. After the installtion is complete, there will be a file called .ht.users.json which contains your login info, which will lock the installer. You can now go to panel.example.com/panel/index.php and log in.
-
-## visudo time!
-With a `sudo` user, run
-
-```shell
-sudo visudo
-```
-
-and at the bottom add:
-
-```visudo
-www-data ALL=(ALL:ALL) NOPASSWD:/var/www/control-panel/assets/wrapper.sh
-```
-
-then exit and save. Be sure the script is executable with:
-
-```shell
-sudo chmod +x /var/www/control-panel/assets/backend.sh
-sudo chmod +x /var/www/control-panel/assets/wrapper.sh
-```
+Please check [the wiki](https://github.com/NerdOfLinux/control-panel/wiki/Install)
 
 # Notes
 ## This is NOT ready for use
 Please do **NOT** use this yet. It won't help you with anything, and adds a huge security hole if someone bypasses the login.
-
-## What does work:
-* Installer
-* Updating
-* Upgrading
 
 ## The reboot command doesn't work
 The reboot command will work just fine if you edit the backend.sh file. The reason I didn't implement this yet is because I'm currently trying to see how long I can go without a reboot :-) .
@@ -102,11 +27,7 @@ All images,unless otherwise stated, are **NOT** made by me. Unless otherwise sta
 
 # Installers
 ## WordPress
-This is currently the only installer. It asks you for the domain name, and does 99% of the work for you. It creates the database, and all you need to do is set up your site's name and your user. It uses many security features such as:
-* Using random salts
-* Custom database prefix
-* Long database password 
-all with the click of a button! 
+Please see [the wiki](https://github.com/NerdOfLinux/control-panel/wiki/WordPress)
 
 ## More coming soon...
 Let me know what other installers you want, and I'll work on making them.
