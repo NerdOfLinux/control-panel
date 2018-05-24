@@ -20,9 +20,9 @@ $action=$_GET['action'];
 //If there is no action set, provide a list of actions
 if($action == ""){
 
-	echo '<a class="button" href="?action=update"> <img class="img-button" src="/assets/images/update.png"> <br>Update </a>';
-	echo '<a class="button" href="?action=upgrade"> <img class="img-button" src="/assets/images/upgrade.png"><br>Upgrade </a>';
+	echo '<a class="button" href="?action=upgrade"> <img class="img-button" src="/assets/images/update.png"><br>Upgrade </a>';
 	echo '<a class="button" href="?action=custom"> <img class="img-button" src="/assets/images/bash.png"><br> Run Command </a>';
+	echo '<a class="button" href="?action=clean"> <img class="img-button" src="/assets/images/clean.png"><br>Remove Unused Packages</a>';
 	echo '<a class="button" href="?action=reboot"> <img class="img-button" src="/assets/images/reboot.png"><br>Reboot';
 	if(is_file("/var/run/reboot-required")){
 		echo "(updates waiting)</a>";
@@ -30,21 +30,6 @@ if($action == ""){
 		echo "</a>";
 	}
 
-}
-//If the action is set to update
-else if($action == "update"){
-	//Does not use exec so page loads nearly instantly without waiting
-	//This runs it without making PHP wait for a response
-	pclose(popen("sudo $backend update", "r"));
-	echo '
-<script>
-document.getElementById("title").innerHTML="Update";
-function refreshFrame(){
-	$("#frame").load("/assets/readfile.php?type=update#content")
-}
-</script>
-<div id="frame"></div>
-';
 }
 //If the action is set to upgrade
 else if($action == "upgrade"){
@@ -108,5 +93,18 @@ function refreshFrame(){
 </pre>
 ';
 	}
+}else if($action == "clean"){
+	pclose(popen("sudo $backend clean", "r"));
+	echo '
+<script>
+document.getElementById("title").innerHTML="Clean up packages";
+function refreshFrame(){
+     $("#frame").load("/assets/readfile.php?type=clean#content")
+}
+</script>
+<pre>
+<div id="frame"></div>
+</pre>
+';
 }
 ?>

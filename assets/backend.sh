@@ -10,21 +10,25 @@ then
 	mkdir /tmp/panel/install
 fi
 
-if [ $1 = "update" ]
-then
-	if ! lsof | grep /tmp/panel/update.out > /dev/null
-	then
-		apt-get update > /tmp/panel/update.out
-		echo "<h3> Available updates: </h3>" >> /tmp/panel/update.out 2>&1
-		apt list --upgradeable >> /tmp/panel/update.out
-	fi
-fi
-
 if [ $1 = "upgrade" ]
 then
 	if ! lsof | grep /tmp/panel/upgrade.out > /dev/null
      then
-          apt-get -y upgrade > /tmp/panel/upgrade.out 2>&1
+		printf "<h3> Updating </h3>" >/tmp/panel/upgrade.out
+		apt-get update >> /tmp/panel/upgrade.out 2>&1
+		printf "<h3> Upgrading </h3>" >>/tmp/panel/upgrade.out
+          apt-get -y upgrade >> /tmp/panel/upgrade.out 2>&1
+     fi
+fi
+if [ $1 = "clean" ]
+then
+     if ! lsof | grep /tmp/panel/clean.out > /dev/null
+     then
+		printf "<h3>Removing unused packages</h3>" > /tmp/panel/clean.out
+          apt-get -y autoremove >> /tmp/panel/clean.out 2>&1
+		printf "<h3>Cleaning apt</h3>" >> /tmp/panel/clean.out
+		apt-get -y clean >> /tmp/panel/clean.out
+		apt-get -y autoclean >> /tmp/panel/clean.out
      fi
 fi
 if [ $1 = "reboot" ]
