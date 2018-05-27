@@ -29,10 +29,9 @@ $data=[];
 $data["username"] = $_POST['username'];
 $data["password"] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $json = json_encode($data);
-$file=fopen(".ht.users.json", "w");
-fwrite($file, $json);
-fclose($file);
+file_put_contents(".ht.users.json", $json);
 if(file_exists(".ht.users.json")){
 	echo "Install complete.";
+	header("Location: /");
 }
 ?>

@@ -9,7 +9,10 @@ if [ ! -d /tmp/panel/install ]
 then
 	mkdir /tmp/panel/install
 fi
-
+if [ ! -d /tmp/panel/remove ]
+then
+	mkdir /tmp/panel/remove
+fi
 if [ $1 = "upgrade" ]
 then
 	if ! lsof | grep /tmp/panel/upgrade.out > /dev/null
@@ -54,6 +57,10 @@ fi
 if [ $1 = "install" ]
 then
 	bash $env/installers/$2.sh ${@:3} >/tmp/panel/install/$2.out 2>&1
+fi
+if [ $1 = "remove" ]
+then
+	bash $env/removers/$2.sh ${@:3} >/tmp/panel/remove/$2.out 2>&1
 fi
 if [ $1 = "restartnginx" ]
 then

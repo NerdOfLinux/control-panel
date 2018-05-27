@@ -32,6 +32,4 @@ Please see [the wiki](https://github.com/NerdOfLinux/control-panel/wiki/WordPres
 ## More coming soon...
 Let me know what other installers you want, and I'll work on making them.
 
-## Create your own installer
-To create your own installer(and submit a pull request, please), simple create an installation shell script in the `assets/installers` folder. In the script, the first and only argument will be the domain name the user would like to install to. 
 

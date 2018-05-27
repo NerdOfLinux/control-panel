@@ -18,6 +18,8 @@ echo "Installing required PHP packages:"
 apt-get -y install php-mysql php-curl php-imagick php-gd php-mbstring php-mcrypt php-pspell php-zip
 echo "Moving to /tmp..."
 cd /tmp
+echo "Deleting existing temporary files"
+rm -rf wp-tmp
 mkdir wp-tmp
 cd wp-tmp
 # Download + extract WordPress
@@ -123,11 +125,12 @@ location ~ ^/\.user\.ini {
         index index.php;
         root $dir;
 	   server_name $domain;
-
-        location / {
-               try_files \$uri \$uri/ /index.php?\$args;
-        }
-        include snippets/php;
+	   #REPLACE
+		location / {
+			try_files \$uri \$uri/ /index.php?\$args;
+		}
+	   #.REPLACE
+	    include snippets/php;
         location ~ ^/\.user {
                 deny all;
         }
@@ -145,11 +148,4 @@ echo "Enabling config..."
 ln -s /etc/nginx/sites-available/wp-$domain.conf /etc/nginx/sites-enabled/
 echo "Setting permissions, please be patient..."
 chown -R www-data:www-data $dir
-echo "Restarting NGINX..."
-if nginx -t
-then
-	service nginx restart
-	echo "Go to $domain to complete the install!"
-else
-	echo "NGINX config error, not restarting..."
-fi
+echo "<h3> Please Restart NGINX </h3>"
