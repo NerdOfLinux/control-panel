@@ -13,9 +13,6 @@ Please check [the wiki](https://github.com/NerdOfLinux/control-panel/wiki/Instal
 ## This is NOT ready for use
 Please do **NOT** use this yet. It won't help you with anything, and adds a huge security hole if someone bypasses the login.
 
-## The reboot command doesn't work
-The reboot command will work just fine if you edit the backend.sh file. The reason I didn't implement this yet is because I'm currently trying to see how long I can go without a reboot :-) .
-
 ## How to help
 Install this on a [VPS](https://m.do.co/c/f941d4888bfb), look for problems, and open an issue. Alternatively, you can fork this repository, update it, and then submit a pull request.
 

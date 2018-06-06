@@ -36,7 +36,7 @@ then
 fi
 if [ $1 = "reboot" ]
 then
-	echo "yes" > /tmp/panel/reboot.out
+	shutdown -r now > /tmp/panel/reboot.out
 fi
 if [ $1 = "custom" ]
 then

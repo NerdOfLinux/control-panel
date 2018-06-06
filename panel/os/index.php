@@ -30,81 +30,9 @@ if($action == ""){
 		echo "</a>";
 	}
 
-}
-//If the action is set to upgrade
-else if($action == "upgrade"){
-     pclose(popen("sudo $backend upgrade", "r"));
-     echo '
-<script>
-document.getElementById("title").innerHTML="Upgrade";
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=upgrade#content")
-}
-</script>
-<div id="frame"></div>
-';
-}
-//If the action is set to reboot
-else if($action == "reboot"){
-?>
-<script>
-document.getElementById("title").innerHTML="Reboot";
-</script>
-<form method="post" action="">
-<input id="rebootButton" type="submit" value="Reboot Now" name="submit">
-</form>
-<?php
-if(isset($_POST['submit'])){
-		echo '
-<script>
-setTimeout(function(){
-	window.location.href = "/panel";
-}, 15000);
-</script>
-';
-		echo "<h2> Going down! </h2>";
-		echo "You will be redirected to the home page in 15 seconds.";
-		shell_exec("sudo $backend reboot");
+}else{
+	if(!include("$action.php")){
+		echo "Oops, $action does not appear to exist yet.";
 	}
-}
-//If the action is set to custom
-else if($action == "custom"){
-?>
-<script>
-document.getElementById("title").innerHTML="Custom";
-</script>
-<form action="" method="post">
-Command: <input id="comInput" type="text" name="com" autocomplete="off">
-<input id="comButton" type="submit" name="submit" value="Run!">
-</form>
-<?php
-	if(isset($_POST['submit'])){
-		$com=$_POST['com'];
-		pclose(popen("sudo $backend custom \"$com\"", "r"));
-		echo '
-<script>
-document.getElementById("title").innerHTML="Update";
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=custom#content")
-}
-</script>
-<pre>
-<div id="frame"></div>
-</pre>
-';
-	}
-}else if($action == "clean"){
-	pclose(popen("sudo $backend clean", "r"));
-	echo '
-<script>
-document.getElementById("title").innerHTML="Clean up packages";
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=clean#content")
-}
-</script>
-<pre>
-<div id="frame"></div>
-</pre>
-';
 }
 ?>

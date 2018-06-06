@@ -1,6 +1,7 @@
 <?php
 session_set_cookie_params("3600");
 session_start();
+include("$webroot/assets/functions.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,3 +28,8 @@ echo preg_replace("*\s*", "", $contents);
 
 </head>
 <body>
+<?php
+if(isset($webroot)){
+	$safe="true";
+}
+?>

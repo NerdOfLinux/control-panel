@@ -212,5 +212,11 @@ chmod +x /var/www/control-panel/assets/wrapper.sh
 sudo chsh www-data -s /bin/bash
 #Restart NGINX
 service nginx restart
+#Configure UFW
+echo "Configuring firwall..."
+ufw enable
+ufw limit 22/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp
 #Tell user to complete install
 echo "Please go to panel.${domain}/install.php to complete the install."

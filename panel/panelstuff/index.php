@@ -16,55 +16,9 @@ if(!isset($action) || $action == ""){
 <a href="?action=password" class="button" style="border-color: blue"><img class="img-button" src="/assets/images/password.png"><br>Update Password</a>
 </div>
 <?php
-}
-if($action=="update"){
-?>
-<script>
-document.getElementById("title").innerHTML="Panel Update";
-</script>
-<script>
-$(function(){
-setInterval(refreshFrame, 1000);
-});
-</script>
-<?php
-	pclose(popen("sudo $backend panelupdate $webroot", "r"));
-?>
-<script>
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=panelupdate#content")
-}
-</script>
-<div id="frame"></div>
-<?php
-}else if($action == "password"){
-?>
-<script>
-document.getElementById("title").innerHTML="Update Password";
-</script>
-<form action="" method="post">
-<pre>
-New Password:    <input type="password" name="password" class="fancyInput">
-Verify Password: <input type="password" name="verify" class="fancyInput">
-<input type="submit" name="submit" class="fancyButton">
-</pre>
-</form>
-<?php
-	if(isset($_POST['submit'])){
-		$password=$_POST['password'];
-		$verify=$_POST['verify'];
-		if($password != $verify){
-			echo "<br>Passwords don't match!";
-			exit();
-		}
-		$contents=file_get_contents("$webroot/.ht.users.json");
-		$data=json_decode($contents, true);
-		$newdata=[];
-		$newdata['username']=$data['username'];
-		$newdata['password']=password_hash($password, PASSWORD_DEFAULT);
-		$json=json_encode($newdata);
-		file_put_contents("$webroot/.ht.users.json", "$json");
-		echo "<br> Password Updated!";
+}else{
+	if(!include("$action.php")){
+		echo "Oops, $action does not appear to exist yet.";
 	}
 }
 ?>
