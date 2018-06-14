@@ -96,7 +96,7 @@ then
 			if sed -i "/server_name*/i include $filename;" /etc/nginx/sites-available/*
 			then
 				touch $env/snippets/.$3.active
-				echo "Activated $filename" > /tmp/panel/easysnippets.out
+				printf "Activated $filename\nPlease restart NGINX" > /tmp/panel/easysnippets.out
 			fi
 		else
 			echo "Sorry, $3 not found" > /tmp/panel/easysnippets.out
@@ -106,7 +106,7 @@ then
 		if sed -i "s,include $filename;,,g" /etc/nginx/sites-available/*
 		then
 			rm $env/snippets/.$3.active
-			echo "Deactivated $filename" > /tmp/panel/easysnippets.out
+			printf "Deactivated $filename\nPlease restart NGINX" > /tmp/panel/easysnippets.out
 		fi
 	fi
 fi

@@ -22,57 +22,11 @@ if(!isset($what) || $what == ""){
 <a class="button" href="?what=install"><img class="img-button" src="/assets/images/installers.png"> <br> Install </a>
 <a class="button" href="?what=remove"><img class="img-button" src="/assets/images/remove.png"><br> Remove </a>
 <?php
-}else if($what=="install"){
-?>
-<form action="" method="post" id="hideOnSubmit">
-Domain: <input id="comInput" type="text" name="domain" autocomplete="off" required>
-<input id="comButton" type="submit" name="submit" value="Install!">
-</form>
-<?php
-	if(isset($_POST['submit'])){
-		$domain=$_POST['domain'];
-		pclose(popen("sudo $backend install $app $domain", "r"));
-?>
-<script>
-document.getElementById("title").innerHTML="WordPress Install";
-document.getElementById("hideOnSubmit").style.display="none";
-function refreshFrame(){
-<?php
-     echo "\$(\"#frame\").load(\"/panel/wordpress/installers.php?what=install#content\")";
-?>
+}else{
+	$action=$what;
+     if(!include("$action.php")){
+          echo "Oops, $action does not appear to exist yet.";
+     }
 }
-</script>
-<?php
-	}
-}else if($what=="remove"){
-?>
-<form action="" method="post" id="hideOnSubmit">
-Domain: <input id="comInput" type="text" name="domain" autocomplete="off" required>
-<br>
-<input type="checkbox" required>I understand this will delete the WordPress install, and the install will not be recoverable<br>
-<input id="comButton" type="submit" name="submit" value="Remove!" style="width: 70px">
-</form>
-<?php
-        if(isset($_POST['submit'])){
-                $domain=$_POST['domain'];
-                pclose(popen("sudo $backend remove $app $domain", "r"));
-?>
-<script>
-document.getElementById("title").innerHTML="Delete a WordPress install";
-document.getElementById("hideOnSubmit").style.display="none";
-function refreshFrame(){
-<?php
-     echo "\$(\"#frame\").load(\"/panel/wordpress/installers.php?what=remove#content\")";
-?>
-}
-</script>
-<?php
-        }
-}
-?>
-<pre>
-<div id="frame"></div>
-</pre>
-<?php
 include("$webroot/assets/footer.php");
 ?>

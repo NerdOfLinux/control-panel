@@ -125,11 +125,10 @@ location ~ ^/\.user\.ini {
         index index.php;
         root $dir;
 	   server_name $domain;
-	   #REPLACE
+	   include $dir/nginx.conf;
 		location / {
 			try_files \$uri \$uri/ /index.php?\$args;
 		}
-	   #.REPLACE
 	    include snippets/php;
         location ~ ^/\.user {
                 deny all;
@@ -146,6 +145,8 @@ location ~ ^/\.user\.ini {
 EOF
 echo "Enabling config..."
 ln -s /etc/nginx/sites-available/wp-$domain.conf /etc/nginx/sites-enabled/
+echo "Creating nginx.conf"
+touch $dir/nginx.conf
 echo "Setting permissions, please be patient..."
 chown -R www-data:www-data $dir
 echo "<h3> Please Restart NGINX </h3>"
