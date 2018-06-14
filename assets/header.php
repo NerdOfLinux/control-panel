@@ -19,11 +19,11 @@ echo "<title>$title</title>";
 //Disallow caching
 header("Cache-Control: max-age=0");
 header("Pragma: no-cache");
-//Condense all CSS
-$contents=file_get_contents("$webroot/assets/style.css");
-echo preg_replace("*\s*", "", $contents);
+//Inline CSS to prevent caching
+echo file_get_contents("$webroot/assets/style.css");
 ?>
 </style>
+<!-- Get jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 </head>

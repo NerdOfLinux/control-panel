@@ -35,3 +35,6 @@ if(file_exists(".ht.users.json")){
 	header("Location: /");
 }
 ?>
+</body>
+</html>
+

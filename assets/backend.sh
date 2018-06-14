@@ -85,6 +85,32 @@ then
 		rm $3 >/tmp/test.out 2>&1
 	fi
 fi
+
+if [ $1 = "nginxsnippet" ]
+then
+	filename=$env/snippets/$3
+	if [ $2 = "add" ]
+	then
+		if [ -f $filename ]
+		then
+			if sed -i "/server_name*/i include $filename;" /etc/nginx/sites-available/*
+			then
+				touch $env/snippets/.$3.active
+				echo "Activated $filename" > /tmp/panel/easysnippets.out
+			fi
+		else
+			echo "Sorry, $3 not found" > /tmp/panel/easysnippets.out
+		fi
+	elif [ $2 = "remove" ]
+	then
+		if sed -i "s,include $filename;,,g" /etc/nginx/sites-available/*
+		then
+			rm $env/snippets/.$3.active
+			echo "Deactivated $filename" > /tmp/panel/easysnippets.out
+		fi
+	fi
+fi
+
 if [ $1 = "panelupdate" ]
 then
 	if ! lsof | grep /tmp/panel/panelupdate.out > /dev/null

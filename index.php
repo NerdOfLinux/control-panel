@@ -53,4 +53,5 @@ if(password_verify($_POST['password'], $data["password"])){
 	echo "Username or password is incorrect.";
 	exit();
 }
+include("$webroot/assets/footer.php");
 ?>

@@ -21,4 +21,6 @@ if(!isset($action) || $action == ""){
 		echo "Oops, $action does not appear to exist yet.";
 	}
 }
+include("$webroot/assets/footer.php");
 ?>
+

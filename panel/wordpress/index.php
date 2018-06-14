@@ -19,7 +19,7 @@ $what=$_GET['what'];
 $app="wordpress";
 if(!isset($what) || $what == ""){
 ?>
-<a class="button" href="?what=install"><img class="img-button" src="/assets/images/wordpress.png"> <br> Install </a>
+<a class="button" href="?what=install"><img class="img-button" src="/assets/images/installers.png"> <br> Install </a>
 <a class="button" href="?what=remove"><img class="img-button" src="/assets/images/remove.png"><br> Remove </a>
 <?php
 }else if($what=="install"){
@@ -73,5 +73,6 @@ function refreshFrame(){
 <pre>
 <div id="frame"></div>
 </pre>
-</body>
-</html>
+<?php
+include("$webroot/assets/footer.php");
+?>

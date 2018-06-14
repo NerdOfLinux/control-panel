@@ -9,7 +9,7 @@ $backend="$webroot/assets/wrapper.sh $webroot/assets/backend.sh ";
 <hr>
 <div id="hideOnClick">
 <h3> Available Options: </h3>
-<a href="wordpress/index.php" class="button"> <img class="img-button" src="/assets/images/installers.png"><br> WordPress </a>
+<a href="wordpress/index.php" class="button"> <img class="img-button" src="/assets/images/wordpress.png"><br> WordPress </a>
 <a href="os/index.php" class="button"> <img class="img-button" src="/assets/images/server-management.png"><br>Server Management
 <a href="nginx/index.php" class="button"><img class="img-button" src="/assets/images/nginx.png"><br> NGINX </a>
 <a href="panelstuff/index.php" class="button"><img class="img-button" src="/assets/images/panelstuff.png"><br>Manage Panel</a>
@@ -21,4 +21,6 @@ if($_GET['action']=="logout"){
 	session_unset($_SESSION['login']);
 	header("Location: ../");
 }
+include("$webroot/assets/footer.php");
 ?>
+
