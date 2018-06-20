@@ -11,9 +11,11 @@ Domain: <input id="comInput" type="text" name="domain" autocomplete="off" requir
 document.getElementById("title").innerHTML="WordPress Install";
 document.getElementById("hideOnSubmit").style.display="none";
 function refreshFrame(){
+	if(!$("#frame").is(":hover")){
 <?php
      echo "\$(\"#frame\").load(\"/panel/wordpress/installers.php?what=install#content\")";
 ?>
+	}
 }
 </script>
 <?php

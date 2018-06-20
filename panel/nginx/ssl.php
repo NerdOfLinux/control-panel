@@ -47,9 +47,10 @@ API Key:        <input type="password" class="fancyInput" name="key" required>
 ?>
 <script>
 document.getElementById("hideOnClick").style.display="none";
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=letsencrypt#content")
-}
+<?php
+$type="letsencrypt";
+include("$webroot/assets/refreshFrame.php");
+?>
 </script>
 <?php
 	}

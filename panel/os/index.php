@@ -12,7 +12,7 @@ $backend="$webroot/assets/wrapper.sh $webroot/assets/backend.sh ";
 <hr>
 <script>
 $(function(){
-setInterval(refreshFrame, 1000);
+    setInterval(refreshFrame, 1000);
 });
 </script>
 <?php
@@ -21,6 +21,7 @@ $action=$_GET['action'];
 if($action == ""){
 
 	echo '<a class="button" href="?action=upgrade"> <img class="img-button" src="/assets/images/update.png"><br>Upgrade </a>';
+	echo '<a class="button" href="?action=fix"><img class="img-button" src="/assets/images/fix.png"><br>Fix Packages</a>';
 	echo '<a class="button" href="?action=custom"> <img class="img-button" src="/assets/images/bash.png"><br> Run Command </a>';
 	echo '<a class="button" href="?action=clean"> <img class="img-button" src="/assets/images/clean.png"><br>Remove Unused Packages</a>';
 	echo '<a class="button" href="?action=reboot"> <img class="img-button" src="/assets/images/reboot.png"><br>Reboot';

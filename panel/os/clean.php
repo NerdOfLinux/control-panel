@@ -7,9 +7,10 @@ pclose(popen("sudo $backend clean", "r"));
 ?>
 <script>
 document.getElementById("title").innerHTML="Clean up packages";
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=clean#content")
-}
+<?php
+$type="clean";
+include("$webroot/assets/refreshFrame.php");
+?>
 </script>
 <pre>
 <div id="frame"></div>

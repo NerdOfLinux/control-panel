@@ -15,9 +15,10 @@ setInterval(refreshFrame, 1000);
 	pclose(popen("sudo $backend panelupdate $webroot", "r"));
 ?>
 <script>
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=panelupdate#content")
-}
+<?php
+$type="panelupdate";
+include("$webroot/assets/refreshFrame.php");
+?>
 </script>
 <div id="frame"></div>
 

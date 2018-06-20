@@ -8,6 +8,7 @@ a{
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 20px;
+	border-color: blue;
 	padding: 5px;
 	margin: 5px;
 	display: inline-block;
@@ -90,9 +91,13 @@ a{
 .center{
 	text-align: center;
 }
-#homeLink{
+#footer{
 	position: absolute;
 	bottom: 5px;
 	text-align: center;
 	width: 100%;
+}
+#frame{
+	background-color: whitesmoke;
+	display: inline-block;
 }

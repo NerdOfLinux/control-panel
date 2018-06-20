@@ -6,8 +6,9 @@ if(!isset($safe)){
 ?>
 <script>
 document.getElementById("title").innerHTML="Restart NGINX";
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=restartnginx#content")
-}
+<?php
+$type="restartnginx";
+include("$webroot/assets/refreshFrame.php");
+?>
 </script>
 <div id="frame"></div>

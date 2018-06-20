@@ -15,7 +15,7 @@ then
 fi
 if [ $1 = "upgrade" ]
 then
-	if ! lsof | grep /tmp/panel/upgrade.out > /dev/null
+	if ! ps -ax | grep apt | grep -v grep > /dev/null
      then
 		printf "<h3> Updating </h3>" >/tmp/panel/upgrade.out
 		apt-get update >> /tmp/panel/upgrade.out 2>&1
@@ -23,9 +23,19 @@ then
           apt-get -y upgrade >> /tmp/panel/upgrade.out 2>&1
      fi
 fi
+if [ $1 = "autofix" ]
+then
+     if ! ps -ax | grep apt | grep -v grep > /dev/null
+	then
+		printf "<h3> Running dpkg </h3>" > /tmp/panel/autofix.out
+		dpkg --configure -a >> /tmp/panel/autofix.out 2>&1
+		printf "<h3> Running apt-get </h3>" >> /tmp/panel/autofix.out
+		apt-get -y install -f >> /tmp/panel/autofix.out 2>&1
+	fi
+fi
 if [ $1 = "clean" ]
 then
-     if ! lsof | grep /tmp/panel/clean.out > /dev/null
+	if ! ps -ax | grep apt | grep -v grep > /dev/null
      then
 		printf "<h3>Removing unused packages</h3>" > /tmp/panel/clean.out
           apt-get -y autoremove >> /tmp/panel/clean.out 2>&1
@@ -146,3 +156,4 @@ EOF
 		echo "Please restart NGINX" >> /tmp/panel/letsencrypt.out
 	fi
 fi
+

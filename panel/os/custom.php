@@ -17,9 +17,10 @@ Command: <input id="comInput" type="text" name="com" autocomplete="off">
 ?>
 <script>
 document.getElementById("title").innerHTML="Update";
-function refreshFrame(){
-     $("#frame").load("/assets/readfile.php?type=custom#content")
-}
+<?php
+$type="custom";
+include("$webroot/assets/refreshFrame.php");
+?>
 </script>
 <pre>
 <div id="frame"></div>

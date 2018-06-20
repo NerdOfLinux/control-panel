@@ -2,12 +2,12 @@
 if(!isset($safe)){
 	exit();
 }
-pclose(popen("sudo $backend upgrade", "r"));
+pclose(popen("sudo $backend autofix", "r"));
 ?>
 <script>
-document.getElementById("title").innerHTML="Upgrade";
+document.getElementById("title").innerHTML="Fix";
 <?php
-$type="upgrade";
+$type="autofix";
 include("$webroot/assets/refreshFrame.php");
 ?>
 
