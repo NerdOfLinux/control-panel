@@ -1,6 +1,11 @@
 # Control Panel
 A simple control panel designed for WordPress VPS hosters.
 
+# Not supported!!!
+I decided to halt development of this project, because the [Vesta](https://vestacp.com/) control panel does everything this does, and more. The only difference is that installing WordPress requires Softaculous premium, which is $12/year. 
+
+Or, spend two minutes creating a DB, and install WordPress for free.
+
 ##  Why not [insert control panel name here]?
 This control panel is **NOT** meant to replace all other control panels, but is desgined to work as a simple one that allows users to install Wordpress **and** manage their servers. 
 
